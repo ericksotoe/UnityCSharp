@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b50c7f241270ab46be38dca36b1273a, type: 3}
+  m_Name: A0. Introduction
+  m_EditorClassIdentifier: 
+  storyText: 'Welcome to this game.
+
+
+    Choose your destiny but beware that you
+    chose corectly.
+
+
+    At each state you will be asked to press a key to complete
+    a different action which could be 1, 2, or 3
+
+
+    At any opint in time, push
+    q to quit
+
+
+    Push 1 to continue'
+  nextStates:
+  - {fileID: 11400000, guid: 29135e1513b284142846c92daa498303, type: 2}
