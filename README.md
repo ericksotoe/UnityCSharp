@@ -1,1 +1,1 @@
-# UnityCSharp
+# This is to archive my adventure through re-learning C# utilizing the awesome Udemy course titled "Complete C# Unity Developer 2D: Learn to Code Making Games" taught and created by Ben Tristem, Rick Davidson and the GameDev.tv Team. I do not take any credit for the ideas or code this is just to archive my experiences. Thank you for the amazing course!
