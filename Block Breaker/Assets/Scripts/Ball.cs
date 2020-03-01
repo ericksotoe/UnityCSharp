@@ -23,7 +23,6 @@ public class Ball : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
         if (!hasStarted) {
             LockBallToPaddle();
             LaunchOnMouseClick();
@@ -31,6 +30,7 @@ public class Ball : MonoBehaviour {
 
     }
 
+    // method used to launch the ball from the paddle
     private void LaunchOnMouseClick() {
         if (Input.GetMouseButtonDown(0)) {
             hasStarted = true;
@@ -38,6 +38,7 @@ public class Ball : MonoBehaviour {
         }
     }
 
+    // method used to apply the ball object to the top of paddle object
     private void LockBallToPaddle() {
         Vector2 paddlePosition = new Vector2(paddle.transform.position.x, paddle.transform.position.y);
         transform.position = paddlePosition + paddleToBallVector;

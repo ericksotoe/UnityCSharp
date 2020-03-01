@@ -19,6 +19,7 @@ public class Block : MonoBehaviour {
 
     // when the block object is destroyed play the break sound and destroy the block at 1.5% volume
     private void DestroyBlock() {
+        FindObjectOfType<GameStatus>().AddToScore();
         AudioSource.PlayClipAtPoint(breakSound, Camera.main.transform.position, 0.015f);
         Destroy(gameObject);
         level.BlockDestroyed();
