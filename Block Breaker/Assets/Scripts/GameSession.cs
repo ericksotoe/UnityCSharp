@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class GameStatus : MonoBehaviour {
+public class GameSession : MonoBehaviour {
 
     // config parametrs
     // this serializes the field and allows a range for the slider
@@ -15,7 +15,7 @@ public class GameStatus : MonoBehaviour {
     // We use the Awake method to implement Singleton pattern to keep track of score
     private void Awake() {
         // checking to see how many game objects of type Game status there are 
-        int gameStatusCount = FindObjectsOfType<GameStatus>().Length;
+        int gameStatusCount = FindObjectsOfType<GameSession>().Length;
         if (gameStatusCount > 1) {
             // disables the curr game obj since it is higher in heirarchy than destory
             gameObject.SetActive(false); 
@@ -38,5 +38,11 @@ public class GameStatus : MonoBehaviour {
     public void AddToScore() {
         currScore += pointsPerBlockDestroyed;
         scoreText.text = currScore.ToString();
+    }
+
+    public void ResetGame() {
+        gameObject.SetActive(false);
+        Destroy(gameObject);
+
     }
 }
