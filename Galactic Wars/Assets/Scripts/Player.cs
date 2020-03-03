@@ -4,8 +4,12 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     // config parameters
+    [Header("Player")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float padding = 0.5f;
+    [SerializeField] int health = 200;
+
+    [Header("Projectiles")]
     [SerializeField] GameObject lazerPrefab;
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] float projectileFiringRate = 0.1f;
@@ -23,13 +27,31 @@ public class Player : MonoBehaviour {
         SetUpMoveBoundaries();
     }
 
-
-
     // Update is called once per frame
     void Update() {
         Move();
         Fire();
     }
+
+    // this method will trigger when a lazer hits a unit with a collider
+    private void OnTriggerEnter2D(Collider2D other) {
+        DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
+        if (!damageDealer) {
+            return;
+        }
+        ProcessHit(damageDealer);
+    }
+
+    // this method will process the damage taken by lazers and destroys if below 1 health
+    private void ProcessHit(DamageDealer damageDealer) {
+        health -= damageDealer.GetDamage();
+        damageDealer.Hit();
+        if (health <= 0) {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+    }
+
 
     // fire method is used to fire the lazer upwards by the pilot
     private void Fire() {
