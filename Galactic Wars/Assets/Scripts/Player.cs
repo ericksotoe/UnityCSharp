@@ -14,6 +14,12 @@ public class Player : MonoBehaviour {
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] float projectileFiringRate = 0.1f;
 
+    [Header("SFX")]
+    [SerializeField] AudioClip deathSFX;
+    [SerializeField] [Range(0, 1)] float deathSFXVolume = 0.025f;
+    [SerializeField] AudioClip shootSFX;
+    [SerializeField] [Range(0, 1)] float shootSFXVolume = 0.01f;
+
     Coroutine firingCoroutine;
 
     // cached references
@@ -47,11 +53,21 @@ public class Player : MonoBehaviour {
         health -= damageDealer.GetDamage();
         damageDealer.Hit();
         if (health <= 0) {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
+            Die();
         }
     }
 
+    private void Die() {
+        FindObjectOfType<Level>().LoadGameOver();
+        gameObject.SetActive(false);
+        Destroy(gameObject);
+        AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position, deathSFXVolume);
+    }
+
+    // getter method that returns the players health
+    public int GetHealth() {
+        return health;
+    }
 
     // fire method is used to fire the lazer upwards by the pilot
     private void Fire() {
@@ -69,6 +85,7 @@ public class Player : MonoBehaviour {
         while (true) {
             GameObject lazer = Instantiate(lazerPrefab, transform.position, Quaternion.identity) as GameObject;
             lazer.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+            AudioSource.PlayClipAtPoint(shootSFX, Camera.main.transform.position, shootSFXVolume);
             yield return new WaitForSeconds(projectileFiringRate);
         }
     }
